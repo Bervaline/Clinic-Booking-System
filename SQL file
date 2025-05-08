@@ -1,0 +1,71 @@
+-- Create Database
+CREATE DATABASE IF NOT EXISTS clinic_booking;
+USE clinic_booking;
+
+-- Departments Table
+CREATE TABLE departments (
+    department_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE
+);
+
+-- Doctors Table
+CREATE TABLE doctors (
+    doctor_id INT AUTO_INCREMENT PRIMARY KEY,
+    full_name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    phone VARCHAR(15) NOT NULL UNIQUE,
+    department_id INT NOT NULL,
+    FOREIGN KEY (department_id) REFERENCES departments(department_id)
+        ON DELETE CASCADE
+);
+
+-- Patients Table
+CREATE TABLE patients (
+    patient_id INT AUTO_INCREMENT PRIMARY KEY,
+    full_name VARCHAR(100) NOT NULL,
+    dob DATE NOT NULL,
+    gender ENUM('Male', 'Female', 'Other') NOT NULL,
+    phone VARCHAR(15) NOT NULL UNIQUE,
+    email VARCHAR(100) UNIQUE
+);
+
+-- Appointments Table
+CREATE TABLE appointments (
+    appointment_id INT AUTO_INCREMENT PRIMARY KEY,
+    patient_id INT NOT NULL,
+    doctor_id INT NOT NULL,
+    appointment_date DATETIME NOT NULL,
+    status ENUM('Scheduled', 'Completed', 'Cancelled') DEFAULT 'Scheduled',
+    FOREIGN KEY (patient_id) REFERENCES patients(patient_id)
+        ON DELETE CASCADE,
+    FOREIGN KEY (doctor_id) REFERENCES doctors(doctor_id)
+        ON DELETE CASCADE
+);
+
+-- Diagnosis Table (1-to-1 with Appointment)
+CREATE TABLE diagnosis (
+    diagnosis_id INT AUTO_INCREMENT PRIMARY KEY,
+    appointment_id INT NOT NULL UNIQUE,
+    description TEXT NOT NULL,
+    FOREIGN KEY (appointment_id) REFERENCES appointments(appointment_id)
+        ON DELETE CASCADE
+);
+
+-- Medications Table (Many-to-Many with Appointments via appointment_medications)
+CREATE TABLE medications (
+    medication_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE,
+    description TEXT
+);
+
+-- Junction Table: appointment_medications
+CREATE TABLE appointment_medications (
+    appointment_id INT NOT NULL,
+    medication_id INT NOT NULL,
+    dosage VARCHAR(100),
+    PRIMARY KEY (appointment_id, medication_id),
+    FOREIGN KEY (appointment_id) REFERENCES appointments(appointment_id)
+        ON DELETE CASCADE,
+    FOREIGN KEY (medication_id) REFERENCES medications(medication_id)
+        ON DELETE CASCADE
+);
