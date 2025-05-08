@@ -1,0 +1,44 @@
+# Clinic Booking System
+
+## 📋 Project Title
+**Clinic Booking System (MySQL Database Project)**
+
+## 📄 Description
+This project implements a complete relational database for a clinic management system using MySQL. It allows for effective management of:
+- Doctor and department information
+- Patient records
+- Appointment scheduling
+- Diagnoses and medications
+- Many-to-many relations between appointments and prescribed medications
+
+The system enforces data integrity using primary keys, foreign keys, and constraints such as `NOT NULL`, `UNIQUE`, and proper normalization to at least 3NF.
+
+## ⚙️ How to Run / Setup the Project
+
+### Requirements:
+- MySQL Server (e.g., MySQL Workbench or XAMPP)
+- A database client for executing SQL scripts
+
+### Steps:
+1. Clone or download this repository.
+2. Open MySQL Workbench or your preferred MySQL client.
+3. Create a new schema (e.g., `clinic_booking`).
+4. Import the provided `clinic_booking_system.sql` file.
+   - This file contains all `CREATE TABLE` statements with constraints and relationships.
+5. Execute the script to build the database schema.
+
+
+
+## 🖼️ Screenshot / ERD
+
+
+
+> This ERD illustrates the structure and relationships of the system, including one-to-many, one-to-one, and many-to-many associations.
+
+## 📁 Repo Includes
+- `clinic_booking_system.sql` – SQL file with full schema
+- `README.md` – Project overview and setup guide
+- ERD Image – Visual diagram of the system (`.png`)
+
+---
+
