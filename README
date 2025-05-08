@@ -28,17 +28,10 @@ The system enforces data integrity using primary keys, foreign keys, and constra
 5. Execute the script to build the database schema.
 
 
-
-## 🖼️ Screenshot / ERD
-
-
-
-> This ERD illustrates the structure and relationships of the system, including one-to-many, one-to-one, and many-to-many associations.
-
 ## 📁 Repo Includes
 - `clinic_booking_system.sql` – SQL file with full schema
 - `README.md` – Project overview and setup guide
 - ERD Image – Visual diagram of the system (`.png`)
 
----
+
 
